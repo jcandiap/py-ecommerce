@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 app_name = 'user'
@@ -17,3 +17,15 @@ def login(request):
 
 def register(request):
     return render(request, 'user/register_user.html')
+
+def validate_login(request):
+    try:
+        if request.method == "POST":
+            email = request.POST.get('username')
+            password = request.POST.get('password')
+            message = f"Hola, { email }"
+            return JsonResponse({ 'message': message })
+        return JsonResponse({ 'message': 'error al verificar' })
+    except Exception as e:
+        print(e)
+        return JsonResponse({ 'error': e })
