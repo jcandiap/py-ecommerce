@@ -47,7 +47,8 @@ INSTALLED_APPS = [
 # Created apps
 
 INSTALLED_APPS += [
-    'store'
+    'apps.store',
+    'apps.user'
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'store.context_processors.datos_globales'
             ],
         },
     },

@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STORE</title>
-</head>
-<body>
-    <a href="{% url 'user:profile' %}">Ir al perfil</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block PAGE_TITLE %} Home {% endblock PAGE_TITLE %}
+{% block CONTENT %}
+    <div class="row gx-5">
+        {% for product in products %}
+        <div class="card col-8 col-sm-4 col-md-2 m-2 pointer">
+            <a href="{% url 'store:detail' %}?id={{ product.id }}" class="text-decoration-none text-black">
+                <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
+                <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ product.price }}</li>
+                </ul>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock CONTENT %}
