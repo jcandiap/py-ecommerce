@@ -9,14 +9,14 @@
             <form style="width: 20rem" id="login-form">
                 {% csrf_token %}
                 <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-                  <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                  <label for="email" class="form-label">Correo electrónico</label>
+                  <input type="email" class="form-control" id="email" name="email">
                 </div>
                 <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="password">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="password" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
                 <br>
                 <a href="{% url 'user:register' %}">¿No tienes cuenta? Registrate aquí</a>
             </form>
@@ -33,11 +33,31 @@
                 body: formData,
             })
             .then(function(response) {
-                console.log(response.body)
-                alert(response.body)
+                if( response.ok ) return response.json();
+                throw new Error(response.statusText);
+            })
+            .then(function(data) {
+                console.log(data);
+                if( data.error ) {
+                    Swal.fire(
+                        '¡Problemas al iniciar sesión 😭!',
+                        data.error,
+                        'error'
+                    )
+                } else {
+                    Swal.fire(
+                        '¡Inicio de sesión exitoso!',
+                        data.message,
+                        'success'
+                    )
+                }
             })
             .catch(function(error) {
-                alert(error)
+                Swal.fire(
+                    'Error en el inicio',
+                    error?.message,
+                    'error'
+                )
             });
         });
     </script>
