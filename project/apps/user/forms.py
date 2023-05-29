@@ -13,3 +13,6 @@ class RegisterForm(forms.Form):
 class LoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(max_length=100)
+    
+class CountryForm(forms.Form):
+    country = forms.CharField(max_length=100)

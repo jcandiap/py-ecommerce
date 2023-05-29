@@ -32,16 +32,16 @@
                         Mantenedores
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Categorias</a></li>
+                        <li><a class="dropdown-item" href="{% url 'store:category_maintainer' %}">Categorias</a></li>
                         <li><a class="dropdown-item" href="#">Productos</a></li>
-                        <li><a class="dropdown-item" href="#">Paises</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user:country_maintainer' %}">Paises</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
+            {% comment %} <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Buscar</button>
-            </form>
+            </form> {% endcomment %}
             <div style="width: 10px;"></div>
             <a href="{% url 'user:login' %}"><button class="btn btn-outline-info">Iniciar sesión</button></a>
           </div>

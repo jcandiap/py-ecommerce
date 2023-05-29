@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block PAGE_TITLE %} Country maintainer {% endblock PAGE_TITLE %}
+{% block CONTENT %}
+    <div class="row">
+        <div class="col-md-6 col-12">
+            <h1>Mantenedor de paises</h1>
+            <form style="width: 20rem" id="category-form" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="country" class="form-label">Nombre del pais</label>
+                  <input type="text" class="form-control" id="country" name="country" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+        <div class="col-md-6 col-12">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for country in added_countries %}
+                    <tr>
+                        <td>{{ country.name }}</td>
+                        <td>
+                            <a href="{% url 'user:country_delete' %}?id={{ country.id }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock CONTENT %}

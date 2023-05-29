@@ -10,4 +10,6 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
     path('validate-login', views.validate_login, name='validate-login'),
+    path('country-maintainer', views.country_maintainer, name='country_maintainer'),
+    path('country-delete', views.country_delete, name='country_delete')
 ]

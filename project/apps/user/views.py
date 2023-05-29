@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import User, Country
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, CountryForm
 from django.contrib import messages
 from uuid import uuid4 as uuid
 
@@ -72,3 +72,22 @@ def __check_password(user: User, password: str):
     if user.password == password:
         return True
     return False
+
+def country_maintainer(request):
+    if request.method == 'POST':
+        form = CountryForm(request.POST)
+        if form.is_valid():
+            form_info = form.cleaned_data
+            country = Country(name = form_info["country"])
+            country.save()
+    countries = Country.objects.all()
+    return render(request, 'user/country_maintainer.html', { 'added_countries': countries })
+
+def country_delete(request):
+    id = request.GET.get('id')
+    try:
+        country = Country.objects.get(id = id)
+        country.delete()
+    except:
+        return redirect('/')
+    return redirect('/profile/country-maintainer')
