@@ -10,6 +10,8 @@ Dependencias instaladas dentro del .venv:
 
 ## Notas 🥺
 - Al generar los modelos tuve un problema al utilizar el Field UUID es por eso que utilice la libreria de Python uuid para generar el valor por defecto
+- Debo modificar el mantenedor de paises ya que este quedo dentro de la ruta "/profile" (espero recomendaciones 🥲)
+- El login lo maneje de forma distinta ya que queria que hubiera mas interacción en la pagina sin recargarla es por esto que agregue JavaScript y cambié la forma de capturar la respuesta enviando desde la vista un Json
 
 ## 🔗 Links
 [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jcandiap/)
