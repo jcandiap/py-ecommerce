@@ -2,10 +2,10 @@ from django.db import models
 from uuid import uuid4 as uuid
 
 class Category(models.Model):
-    id = models.CharField(primary_key=True, max_length=36, default=uuid)
+    id = models.CharField(primary_key=True, max_length=36, default=uuid, editable=False)
     name = models.CharField(max_length=100, default='No especificada')
 class Product(models.Model):
-    id = models.CharField(primary_key=True, max_length=36, default=uuid)
+    id = models.CharField(primary_key=True, max_length=36, default=uuid, editable=False)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     stock = models.IntegerField(default=1)
@@ -14,6 +14,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default='N/A')
     
 class Gallery(models.Model):
-    id = models.CharField(primary_key=True, max_length=36, default=uuid)
+    id = models.CharField(primary_key=True, max_length=36, default=uuid, editable=False)
     product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.CharField(max_length=300)
