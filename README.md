@@ -8,6 +8,18 @@ Dependencias instaladas dentro del .venv:
 - Django **4.2.1**
 - sqlparse **0.4.4**
 
+# Funcionamiento de la APP
+## Usuario
+- La aplicación cuenta con una parte de Login y Registro de usuario
+
+## Productos
+- Los productos se muestran todos en la página principal
+- Al hacer click en un producto se puede ver la información completa de esta
+- En la parte superior existe un filtro donde se pueden ver los productos por categoria
+
+## Mantenedores
+- Existen mantenedores para Productos, Categorias y Paises (Esta ultima se usa solo para el formulario de registro de los usuarios)
+
 ## Notas 🥺
 - Al generar los modelos tuve un problema al utilizar el Field UUID es por eso que utilice la libreria de Python uuid para generar el valor por defecto
 - Debo modificar el mantenedor de paises ya que este quedo dentro de la ruta "/profile" (espero recomendaciones 🥲)
