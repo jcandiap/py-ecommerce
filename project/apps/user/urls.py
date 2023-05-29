@@ -9,5 +9,6 @@ urlpatterns = [
     path('orders/', views.orders),
     path('login/', views.login, name='login'),
     path('register/', views.register, name='register'),
-    path('validate-login', views.validate_login, name='validate-login')
+    path('validate-login', views.validate_login, name='validate-login'),
+    path('validate-register', views.validate_register, name='validate-register')
 ]

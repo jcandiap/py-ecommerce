@@ -1,6 +1,9 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import User
+from .models import User, Country
+from .forms import RegisterForm, LoginForm
+from django.contrib import messages
+from uuid import uuid4 as uuid
 
 app_name = 'user'
 # Create your views here.
@@ -17,7 +20,30 @@ def login(request):
     return render(request, 'user/login_user.html')
 
 def register(request):
-    return render(request, 'user/register_user.html')
+    countries = Country.objects.all()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form_info = form.cleaned_data
+            user = User(
+                id = uuid, 
+                name = form_info["nombre"], 
+                last_name = form_info["apellido"], 
+                email = form_info["email"], 
+                password = form_info["password"], 
+                avatar = form_info["avatar"], 
+                country = form_info["pais"]
+            )
+            user.save()
+            return render(request, 'user/login_user.html')
+        else:
+            messages.error(request, 'Recuerda ingresar todos los datos! 🥺')
+    else:
+        form = RegisterForm()
+    return render(request, 'user/register_user.html', { 'form': form, 'countries': countries })
+
+def validate_register(request):
+    return JsonResponse({ 'message': 'error al verificar' })
 
 def validate_login(request):
     try:
@@ -39,7 +65,7 @@ def __check_login_info(request) -> JsonResponse:
         user = User.objects.get(email = email)
         if user is None:
             return JsonResponse({ 'error': 'usuario no encontrado' })
-        if __check_password(password):
+        if __check_password(user, password):
             message = f'Inicio exitoso, bienvenido(a) { user.name } { user.last_name }'
             return JsonResponse({ 'message': message })
     except Exception:

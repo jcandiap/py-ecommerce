@@ -6,14 +6,45 @@
             Registro de usuario
         </div>
         <div class="card-body d-flex justify-content-center">
-            <form style="width: 20rem">
-                <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <form class="w-75 row" id="register-form" method="post">
+                {% csrf_token %}
+                <div class="col-md-4 mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" name="nombre" required>
                 </div>
-                <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <div class="col-md-4 mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="avatar" class="form-label">País</label>
+                    <select class="form-select" aria-label="Default select example" id="pais" name="pais" required>
+                        <option selected>Seleccione un país</option>
+                        {% for country in countries %}
+                        <option value="{{ country.id }}">{{ country.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="avatar" class="form-label">Avatar</label>
+                    <input type="text" class="form-control" id="avatar" name="avatar" aria-describedby="avatarHelp">
+                    <div id="avatarHelp" class="form-text">Proporciona una URL de una imagen valida para tu avatar</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="confirm_email" class="form-label">Confirma el email</label>
+                    <input type="email" class="form-control" id="confirm_email" name="confirm_email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="password" class="form-label">Ingresa contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="confirm_password" class="form-label">Confirma la contraseña</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Registrarse</button>
                 <br>

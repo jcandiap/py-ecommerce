@@ -37,27 +37,14 @@
                 throw new Error(response.statusText);
             })
             .then(function(data) {
-                console.log(data);
                 if( data.error ) {
-                    Swal.fire(
-                        '¡Problemas al iniciar sesión 😭!',
-                        data.error,
-                        'error'
-                    )
+                    Swal.fire('¡Problemas al iniciar sesión 😭!', data.error, 'error')
                 } else {
-                    Swal.fire(
-                        '¡Inicio de sesión exitoso!',
-                        data.message,
-                        'success'
-                    )
+                    Swal.fire('¡Inicio de sesión exitoso!', data.message, 'success')
                 }
             })
             .catch(function(error) {
-                Swal.fire(
-                    'Error en el inicio',
-                    error?.message,
-                    'error'
-                )
+                Swal.fire('Error en el inicio', error?.message, 'error')
             });
         });
     </script>
