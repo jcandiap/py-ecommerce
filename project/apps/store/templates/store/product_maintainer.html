@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block PAGE_TITLE %} Product maintainer {% endblock PAGE_TITLE %}
+{% block CONTENT %}
+    <div class="row">
+        <div class="col-md-4 col-12">
+            <h2>Mantenedor de productos</h2>
+            <form style="width: 20rem" id="product-form" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre de producto</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripción del producto</label>
+                    <textarea type="text" class="form-control" id="description" name="description" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="stock" class="form-label">Cantidad de producto</label>
+                    <input type="number" class="form-control" id="stock" name="stock" min="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Imagen</label>
+                    <input type="text" class="form-control" id="image" name="image" required>
+                    <div id="avatarHelp" class="form-text">Proporciona una URL de una imagen valida para el producto</div>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="price" name="price" min="1" required>
+                </div>
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Categoria</label>
+                    <select class="form-select" aria-label="Default select example" id="pais" name="pais" required>
+                        <option value="N/A">Seleccione una categoria</option>
+                        {% for category in product_categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+            </form>
+        </div>
+        <div class="col-md-8 col-12 table-responsive">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Eliminar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for product in added_products %}
+                    <tr>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.stock }}</td>
+                        <td><img class="img-thumbnail" src="{{ product.image }}" width="50" height="50"></td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.category.name }}</td>
+                        <td>
+                            <a href="{% url 'store:product_delete' %}?id={{ product.id }}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock CONTENT %}

@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from .models import Product, Category
-from .forms import CategoryForm
+from .forms import CategoryForm, ProductForm
 
 app_name = 'store'
 
@@ -39,6 +39,36 @@ def category_delete(request):
     except:
         return redirect('/')
     return redirect('/category-maintainer')
+
+def product_maintainer(request):
+    categories = Category.objects.all()
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            try:
+                form_info = form.cleaned_data
+                category = Category.objects.get(id = form_info["category"])
+                product = Product(
+                    name = form_info["name"], 
+                    description = form_info["description"], 
+                    stock = form_info["stock"], 
+                    image = form_info["image"], 
+                    price = form_info["price"], 
+                    category = category)
+                product.save()
+            except Exception as e:
+                print(e)
+    products = Product.objects.all()
+    return render(request, 'store/product_maintainer.html', { 'added_products': products, 'product_categories': categories })
+
+def product_delete(request):
+    id = request.GET.get('id')
+    try:
+        category = Category.objects.get(id = id)
+        category.delete()
+    except:
+        return redirect('/')
+    return redirect('/product-maintainer')
 
 def __find_products(request):
     try:
