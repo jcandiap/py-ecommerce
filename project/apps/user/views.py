@@ -25,19 +25,18 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form_info = form.cleaned_data
+            country = Country.objects.get(id = form_info["pais"])
             user = User(
-                id = uuid, 
+                id = uuid(), 
                 name = form_info["nombre"], 
                 last_name = form_info["apellido"], 
                 email = form_info["email"], 
                 password = form_info["password"], 
                 avatar = form_info["avatar"], 
-                country = form_info["pais"]
+                country = country
             )
             user.save()
             return render(request, 'user/login_user.html')
-        else:
-            messages.error(request, 'Recuerda ingresar todos los datos! 🥺')
     else:
         form = RegisterForm()
     return render(request, 'user/register_user.html', { 'form': form, 'countries': countries })

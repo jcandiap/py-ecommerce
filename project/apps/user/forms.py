@@ -8,7 +8,7 @@ class RegisterForm(forms.Form):
     confirm_email = forms.EmailField()
     password = forms.CharField(max_length=100)
     confirm_password = forms.CharField(max_length=100);
-    country = forms.CharField(max_length=36)
+    pais = forms.CharField(max_length=100)
     
 class LoginForm(forms.Form):
     email = forms.EmailField()
