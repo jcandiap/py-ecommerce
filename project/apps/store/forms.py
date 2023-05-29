@@ -6,7 +6,7 @@ class CategoryForm(forms.Form):
 class ProductForm(forms.Form):
     name = forms.CharField(max_length=100)
     description = forms.CharField(max_length=200)
-    stock = forms.IntegerField()
+    stock = forms.IntegerField(min_value=1)
     image = forms.CharField(max_length=300)
-    price = forms.IntegerField()
-    category = forms.CharField()
+    price = forms.IntegerField(min_value=1)
+    category = forms.CharField(max_length=300)

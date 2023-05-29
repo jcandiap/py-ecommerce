@@ -29,7 +29,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="avatar" class="form-label">Categoria</label>
-                    <select class="form-select" aria-label="Default select example" id="pais" name="pais" required>
+                    <select class="form-select" aria-label="Default select example" id="category" name="category" required>
                         <option value="N/A">Seleccione una categoria</option>
                         {% for category in product_categories %}
                         <option value="{{ category.id }}">{{ category.name }}</option>

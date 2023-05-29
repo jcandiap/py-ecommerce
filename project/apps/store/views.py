@@ -45,6 +45,7 @@ def product_maintainer(request):
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
+            print('VALIDO!')
             try:
                 form_info = form.cleaned_data
                 category = Category.objects.get(id = form_info["category"])
@@ -64,8 +65,8 @@ def product_maintainer(request):
 def product_delete(request):
     id = request.GET.get('id')
     try:
-        category = Category.objects.get(id = id)
-        category.delete()
+        product = Product.objects.get(id = id)
+        product.delete()
     except:
         return redirect('/')
     return redirect('/product-maintainer')
