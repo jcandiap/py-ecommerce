@@ -41,9 +41,6 @@ def register(request):
         form = RegisterForm()
     return render(request, 'user/register_user.html', { 'form': form, 'countries': countries })
 
-def validate_register(request):
-    return JsonResponse({ 'message': 'error al verificar' })
-
 def validate_login(request):
     try:
         if request.method == "POST":
